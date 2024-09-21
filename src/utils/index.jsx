@@ -1,8 +1,9 @@
 import { Suspense } from "react"
+import "./App.css"
 
 const SuspenseComponent = ({children}) => {
   return (
-    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+    <Suspense fallback={<div class="loader"></div>}>
         {children}
     </Suspense>
   )
