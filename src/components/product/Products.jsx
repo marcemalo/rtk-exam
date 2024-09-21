@@ -1,5 +1,5 @@
 import { useGetUserQuery } from '../../redux/api/productsApi';
-
+import { useDeleteUserMutation } from '../../redux/api/deleteApi';
 import { Button, Card } from 'antd';
 import { Container } from '../../utils';
 import { Link } from 'react-router-dom';
@@ -11,10 +11,14 @@ const { Meta } = Card;
 const Products = () => {
     
     const {data} = useGetUserQuery();
+    const [deleteUser] = useDeleteUserMutation();
     
+    const handleDeleteUser = (id) => {
+        deleteUser({id})
+    }
     
+    console.log(data);
 
-    console.log(data)
    
   return (
     <>
@@ -31,9 +35,8 @@ const Products = () => {
                         <Link to={`/users/${user.id}`}>
                             View Details
                         </Link>
-                        <Link to={`${user.id}`}>
-                        <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-3 mt-3'>Delete</button>
-                        </Link>
+                        <button onClick={() => handleDeleteUser(user.id)} className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-3 mt-3'>Delete</button>
+
                     </Card>
                 ))}
             </div>
